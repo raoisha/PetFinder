@@ -1,10 +1,10 @@
 const mysql = require("mysql");
 
 const db = mysql.createConnection({
-    user: "root",
-    host: "localhost",
-    password: "test@123",
-    database: "countryclub",
+    user: "nalini",
+    host: "newpetfinder.cg5nflqlwqvp.us-west-1.rds.amazonaws.com",
+    password: "petfinder",
+    database: "pet_finder",
     port: "3306",
     multipleStatements: true
   });
