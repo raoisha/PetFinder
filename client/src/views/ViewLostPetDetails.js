@@ -1,6 +1,10 @@
+import Navigator from "../components/Navigator";
+
 function ViewLostPetDetails() {
     return (
-        "view lost pet details"
+        <div>
+            <Navigator></Navigator>
+        </div>
     );
 }
 export default ViewLostPetDetails;
