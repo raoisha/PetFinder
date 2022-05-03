@@ -13,20 +13,26 @@ const getLogin = (req, res) => {
 };
 
 const setLogin = (req, res) => {
-    const user_id = req.body.user_id;
-    const password = req.body.password;
+  const emailid = req.body.emailid;
+  const password = req.body.password;
+
     if (req.session.user) {
       res.send({ message: "already logged in" });
     } else {
-      db.query(SQL_USER.GET_USER_DETAILS, user_id, (err, result) => {
+      db.query(SQL_USER.GET_USER_DETAILS, emailid, (err, result) => {
         if (err) {
-          sendError(req, res, "sql error: " + err.code);
-          return;
-        } else if (result.length > 0) {
+          res.status(404).send({ err: err.code });
+        } 
+          else if (result.length > 0) {
          
           bcrypt.compare(password, result[0].password, (error, response) => {
             if (response) {
-                setSession(req, res, user_id);
+              req.session.user = {
+                user_id: result[0].user_id,
+              };
+              res.send({
+                user_id: result[0].user_id,
+              });
             } else {
               res
                 .status(404)
@@ -44,10 +50,10 @@ const setLogin = (req, res) => {
     const {
       first_name,
       last_name,
-      email_id,
+      emailid,
       password,
       phonenumber,
-      adddress,
+      address,
       city,
       state,
       country,
@@ -72,16 +78,16 @@ const setLogin = (req, res) => {
             [
               first_name,
               last_name,
-              email_id,
+              emailid,
               hash,
               phonenumber,
-              adddress,
+              address,
               city,
               state,
               country,
               zip_code,
             ],
-
+            
             (err, result) => {
               if (err) {
                 res.status(404).send({
@@ -90,15 +96,38 @@ const setLogin = (req, res) => {
                 db.rollback();
                 return;
               } 
+            
+              db.commit(function (err) {
+                if (err) {
+                  res.status(404).send({
+                    err: err.code,
+                  });
+                  db.rollback();
+                  return;
+                }
+              
+              const data = {
+                emailid: emailid,
+              };
+              res.end(JSON.stringify(data));
             });
-          
+          });
       });
     }
   });
   };
-
+  
+  const signout = (req, res) => {
+    if (req.session.user) {
+      req.session.destroy();
+      req.session = null;
+      res.send("hello");
+    }
+  };
+  
 module.exports = {
     getLogin,
     setLogin,
     registerUser,
+    signout,
   };

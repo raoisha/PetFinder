@@ -6,10 +6,15 @@ import {faPersonCircleQuestion } from "@fortawesome/free-solid-svg-icons";
 import {faShieldCat } from "@fortawesome/free-solid-svg-icons";
 import {faDog } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Navigator from "../components/Navigator";
+
+
 
 function Home() {
+
   return ( 
     <div className="shoe-container mx-auto">
+        <Navigator></Navigator>
         <h1>WELCOME</h1>
       <div className="container">
         <div className="row">

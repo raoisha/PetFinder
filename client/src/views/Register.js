@@ -3,6 +3,7 @@ import Axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import Container from "react-bootstrap/esm/Container";
 import Form from "react-bootstrap/Form";
+import Navigator from "../components/Navigator";
 
 function Register() {
   Axios.defaults.withCredentials = true;
@@ -41,8 +42,8 @@ function Register() {
 
     if (
       userDetails.password.trim().length < 5 ||
-      userDetails.customer_first_name.trim() === "" ||
-      userDetails.customer_last_name.trim() === "" ||
+      userDetails.first_name.trim() === "" ||
+      userDetails.last_name.trim() === "" ||
       userDetails.city.trim() === "" ||
       userDetails.address.trim() === "" ||
       userDetails.emailid.trim() === "" ||
@@ -65,7 +66,7 @@ function Register() {
         userDetails,
       })
      .then((response) => {
-        console.log(response);
+        debugger;
         setMessage(
           `Your User ID is "${response.emailid}"`
         );
@@ -90,6 +91,7 @@ function Register() {
 
   return (
     <form className="flight-book-form">
+      <Navigator></Navigator>
       <div className="login-form" style={{ color: "black" }}>
         <Container>
           <h2 className="mb-4 text-center">Fill your details</h2>
@@ -100,7 +102,7 @@ function Register() {
                 <Form.Control
                   type="text"
                   helpertext={
-                    invalid.customer_first_name ? "1-25 characters" : ""
+                    invalid.first_name ? "1-25 characters" : ""
                   }
                   id="register-first-name"
                   label="First Name"
@@ -109,10 +111,10 @@ function Register() {
                     const validation = !!(
                       e.target.value.length > 25 || e.target.value === ""
                     );
-                    setInvalid({ ...invalid, customer_first_name: validation });
+                    setInvalid({ ...invalid, first_name: validation });
                     setUserDetails({
                       ...userDetails,
-                      customer_first_name: e.target.value,
+                      first_name: e.target.value,
                     });
                   }}
                 />
@@ -122,7 +124,7 @@ function Register() {
                 <Form.Control
                   required
                   helpertext={
-                    invalid.customer_last_name ? "1-25 characters" : ""
+                    invalid.last_name ? "1-25 characters" : ""
                   }
                   id="register-last-name"
                   label="Last Name"
@@ -132,10 +134,10 @@ function Register() {
                     const validation = !!(
                       e.target.value.length > 25 || e.target.value === ""
                     );
-                    setInvalid({ ...invalid, customer_last_name: validation });
+                    setInvalid({ ...invalid, last_name: validation });
                     setUserDetails({
                       ...userDetails,
-                      customer_last_name: e.target.value,
+                      last_name: e.target.value,
                     });
                   }}
                 />

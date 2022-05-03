@@ -9,15 +9,13 @@ import ViewLostPetDetails from './views/ViewLostPetDetails';
 import ViewFoundPetDetails from './views/ViewFoundPetDetails';
 import Signin from './views/Signin';
 import Register from './views/Register';
-
-
+import Signout from './views/Signout'
 
 function App() {
   
   return (
     <div className="App">
       <Router>
-        <Navigator />
         <Routes>
           <Route path="/" element={<Home />} /> 
           <Route path="/reportFoundPet" element={<ReportFoundPet />} /> 
@@ -26,6 +24,7 @@ function App() {
           <Route path="/viewfoundPetDetails" element={<ViewFoundPetDetails />} />
           <Route path="/signin" element={<Signin />} /> 
           <Route path="/register" element={<Register />} /> 
+          <Route path="/signout" element={<Signout />} /> 
           <Route path="*" element={<Home />} /> 
         </Routes>
       </Router>

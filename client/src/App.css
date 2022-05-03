@@ -16,6 +16,11 @@ h1 {
   text-align: center;
 }
 
+h2 {
+  text-align: left !important;
+}
+
+
 .svg-inline--fa  {
   height:4rem !important;
 }
@@ -40,4 +45,8 @@ h1 {
 
 .nav-link{
   color:white !important;
+}
+
+input[type=file]{
+  padding:10px;
 }

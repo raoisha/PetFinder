@@ -3,23 +3,25 @@ import { useNavigate, Navigate} from 'react-router-dom';
 import Axios from "axios";
 import { useLoginValidate } from "../components/Validate";
 import Loading from "../components/Loading";
+import Navigator from "../components/Navigator";
 
 function Signin() {
   const [emailid, setEmailId] = useState("");
   const history = useNavigate();
   const [password, setPassword] = useState("");
   const [failMsg, setFailMsg] = useState("");
-  const [user_id, setUserId] = useState("");
   const [loginStatus, setLoginStatus] = useState(false);
   const { loading, userData } = useLoginValidate();
 
   Axios.defaults.withCredentials = true;
 
   const login = () => {
+ 
     Axios.post("http://localhost:3001/signin", {
-      user_id: user_id,
+      emailid: emailid,
       password: password,
     })
+    
       .then((response) => {
         setLoginStatus(true);
       })
@@ -28,14 +30,23 @@ function Signin() {
         setFailMsg(error.response.data.err);
       });
   };
+
+  
+
   if (loading) {
     return <Loading></Loading>;
   }
+
+ 
   if (userData.user_id || loginStatus) {
     return <Navigate to="/home"></Navigate>;
   }
 
+  
+
   return (
+    <div>
+    <Navigator></Navigator>
     <form className="flight-book-form">
       <div className="login-form-box">
         <div className="login-form" style={{ color: "white" }}>
@@ -63,12 +74,14 @@ function Signin() {
           <p className="w-100 text-center">
             &mdash; Haven't registered yet &mdash;
           </p>
-          <a href="Signup">
-            <h4 style={{ color: "black", textAlign: "center" }}>SignUp</h4>
+          <a href="register">
+            <h4 style={{ color: "black", textAlign: "center" }}>Register</h4>
           </a>
         </div>
       </div>
     </form>
+    </div>
+    
   );
 }
 
