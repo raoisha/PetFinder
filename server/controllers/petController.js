@@ -1,0 +1,52 @@
+const db = require("../database/dbConnector");
+const SQL_PET = require("../database/SQLqueries/sqlPet");
+
+
+const lostPetInfo = (req, res) => {
+    const {
+        pet_name,
+        breed,
+        gender,
+        color,
+        last_seen_date,
+        last_seen_time,
+        last_seen_location,
+        pet_photo,
+    } = req.body.lostPetDetails;
+    db.query(
+        SQL_PET.LOST_PET_INFO,
+        [
+            pet_name,
+            breed,
+            gender,
+            color,
+            last_seen_date,
+            last_seen_time,
+            last_seen_location,
+            pet_photo,
+         ],
+         (err, result) => {
+            if (err) {
+              res.status(404).send({
+                 err: "User already exist" 
+              });
+              db.rollback();
+              return;
+            } 
+          
+            db.commit(function (err) {
+              if (err) {
+                res.status(404).send({
+                  err: err.code,
+                });
+                db.rollback();
+                return;
+              }
+            })
+    });
+}
+
+  
+module.exports = {
+    lostPetInfo,
+  };

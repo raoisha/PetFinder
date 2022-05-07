@@ -11,7 +11,7 @@ import { useLoginValidate } from "./Validate";
 function Navigator() {
 
   const { userData } = useLoginValidate();
-  debugger;
+
   return (
     <div>
       <Container fluid>
