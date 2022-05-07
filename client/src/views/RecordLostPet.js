@@ -1,19 +1,36 @@
 import React, { useState, Component, useEffect } from "react";
+import { useNavigate, Navigate} from 'react-router-dom';
 import Navigator from "../components/Navigator";
+import { useLoginValidate } from "../components/Validate";
+import Axios from "axios";
+import redirectLogin from "../components/redirectLogin";
 
-function RecordLostPet() {
+export default function RecordLostPet() {
 
-
+    const { loading, userData } = useLoginValidate();
+            const defaultValues = {
+                pet_name: "",
+                breed: "",
+                gender: "",
+                color: "",
+                last_seen_date: "",
+                last_seen_time: "",
+                last_seen_location: "",
+                pet_photo: "",
+            };
+           
+            const [lostPetDetails, setlostPetDetails] = useState(defaultValues);
             const [selectedFile, setSelectedFile] = useState()
             const [preview, setPreview] = useState()
-        
+            const history = useNavigate();
+            const [message, setMessage] = useState("");
+           
             // create a preview as a side effect, whenever selected file is changed
             useEffect(() => {
                 if (!selectedFile) {
                     setPreview(undefined)
                     return
                 }
-        
                 const objectUrl = URL.createObjectURL(selectedFile)
                 setPreview(objectUrl)
         
@@ -26,8 +43,31 @@ function RecordLostPet() {
                     setSelectedFile(undefined)
                     return
                 }
+                setlostPetDetails({...lostPetDetails, pet_photo:e.target.files[0]});
                 setSelectedFile(e.target.files[0])
             }
+
+           
+        
+    const enterLostPetInfo = () => {
+
+        Axios.post("http://localhost:3001/lostpetinfo", {
+            lostPetDetails,
+        })
+          .then((response) => {
+            setMessage("Pet details entered successfully.");
+            alert("Pet details entered successfully.");
+            setlostPetDetails(true);
+            history.push('/home');
+          })
+          .catch((error) => {
+            setMessage(error.response.data.err);
+            setlostPetDetails(false);
+          });
+
+    };
+                
+      
       
     
     return (
@@ -38,59 +78,81 @@ function RecordLostPet() {
                 <div classname="form-group row">
                     <label for="inputEmail3" classname="col-sm-2 col-form-label">Pet Name</label>
                     <div classname="col-sm-10">
-                        <input type="text" classname="form-control" id="inputEmail3" placeholder="Name of the pet"/>
+                        <input type="text" classname="form-control" id="inputEmail3" placeholder="Name of the pet"
+                        onChange={(e) => {
+                            setlostPetDetails({...lostPetDetails,pet_name:e.target.value});
+                          }}/>
                     </div>
                 </div>
                 <div classname="form-group row">
                     <label for="inputPassword3" classname="col-sm-2 col-form-label">Breed</label>
                     <div classname="col-sm-10">
-                        <input type="text" classname="form-control" id="inputPassword3" placeholder="Breed of the pet"/>
+                        <input type="text" classname="form-control" id="inputPassword3" placeholder="Breed of the pet"
+                         onChange={(e) => {
+                            setlostPetDetails({...lostPetDetails,breed:e.target.value});
+                          }}/>
                     </div>
                 </div>
                 <div classname="form-group row">
                     <label for="inputPassword3" classname="col-sm-2 col-form-label">Gender</label>
                     <div classname="col-sm-10">
-                        <input type="text" classname="form-control" id="inputPassword3" placeholder="Pet Gender"/>
+                        <input type="text" classname="form-control" id="inputPassword3" placeholder="Pet Gender"
+                         onChange={(e) => {
+                            setlostPetDetails({...lostPetDetails,gender:e.target.value});
+                          }}/>
                     </div>
                 </div>
                 <div classname="form-group row">
                     <label for="inputPassword3" classname="col-sm-2 col-form-label">Color</label>
                     <div classname="col-sm-10">
-                        <input type="text" classname="form-control" id="inputPassword3" placeholder=" describe pet Color"/>
+                        <input type="text" classname="form-control" id="inputPassword3" placeholder=" describe pet Color"
+                        onChange={(e) => {
+                            setlostPetDetails({...lostPetDetails,color:e.target.value});
+                          }}/>
                     </div>
                 </div>
 
                 <div classname="form-group row">
                     <label for="inputPassword3" classname="col-sm-2 col-form-label">Last seen date</label>
                     <div classname="col-sm-10">
-                        <input type="date" classname="form-control" id="inputPassword3" placeholder=" describe pet Color"/>
+                        <input type="date" classname="form-control" id="inputPassword3" placeholder=" describe pet Color"
+                        onChange={(e) => {
+                            setlostPetDetails({...lostPetDetails,last_seen_date:e.target.value});
+                          }}/>
                     </div>
                 </div>
                 <div classname="form-group row">
                     <label for="inputPassword3" classname="col-sm-2 col-form-label">Last seen time</label>
                     <div classname="col-sm-10">
-                        <input type="time" classname="form-control" id="inputPassword3" placeholder=" describe pet Color"/>
+                        <input type="time" classname="form-control" id="inputPassword3" placeholder=" describe pet Color"
+                        onChange={(e) => {
+                            setlostPetDetails({...lostPetDetails,last_seen_time:e.target.value});
+                          }}/>
                     </div>
                 </div>
 
                 <div classname="form-group row">
                     <label for="inputPassword3" classname="col-sm-2 col-form-label">Last seen location</label>
                     <div classname="col-sm-10">
-                        <input type="text" classname="form-control" id="inputPassword3" placeholder=" describe pet Color"/>
+                        <input type="text" classname="form-control" id="inputPassword3" placeholder=" describe pet Color"
+                        onChange={(e) => {
+                            setlostPetDetails({...lostPetDetails,last_seen_location:e.target.value});
+                          }}/>
                     </div>
                 </div>
 
                 <div classname="form-group row">
                     <label for="inputPassword3" classname="col-sm-2 col-form-label">Photo</label>
                     <div classname="col-sm-10">
-                    <input type='file' className="" onChange={onSelectFile} />
+                    <input type='file' className="" onChange={onSelectFile} 
+                    />
                         {selectedFile &&  <img src={preview} width="200" height="200"/> }
                     </div>
                 </div>
 
                 <div classname="form-group row">
                     <div classname="col-sm-10">
-                    <button type="submit" classname="btn btn-primary">Submit</button>
+                    <button type="submit" classname="btn btn-primary" onClick={enterLostPetInfo}>Submit</button>
                     </div>
                 </div>          
             </form>    
@@ -98,4 +160,3 @@ function RecordLostPet() {
  
     );
 }
-export default RecordLostPet;
