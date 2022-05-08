@@ -10,9 +10,11 @@ const lostPetInfo = (req, res) => {
         color,
         last_seen_date,
         last_seen_time,
-        last_seen_location,
+        latitude,
+        longitude,
         pet_photo,
     } = req.body.lostPetDetails;
+    
     db.query(
         SQL_PET.LOST_PET_INFO,
         [
@@ -22,7 +24,8 @@ const lostPetInfo = (req, res) => {
             color,
             last_seen_date,
             last_seen_time,
-            last_seen_location,
+            latitude,
+            longitude,
             pet_photo,
          ],
          (err, result) => {
