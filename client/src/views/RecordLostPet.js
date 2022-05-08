@@ -16,7 +16,7 @@ export default function RecordLostPet() {
         longitude: "",
         pet_photo: "",
     };
-    
+
     const [lostPetDetails, setlostPetDetails] = useState(defaultValues);
     const [selectedFile, setSelectedFile] = useState()
     const [preview, setPreview] = useState()
@@ -68,79 +68,124 @@ export default function RecordLostPet() {
         });
     };
 
+    const resetValues=()=>{
+        setlostPetDetails("");
+    }
+
     return (
          
-        <div classname="row text-center">
+        <div className="row text-center">
             <Navigator></Navigator>
-            <form>
-                <div classname="form-group row">
-                    <label for="inputEmail3" classname="col-sm-2 col-form-label">Pet Name</label>
-                    <div classname="col-sm-10">
-                        <input type="text" classname="form-control" id="inputEmail3" placeholder="Name of the pet"
-                        onChange={(e) => {
-                            setlostPetDetails({...lostPetDetails,pet_name:e.target.value});
-                          }}/>
-                    </div>
-                </div>
-                <div classname="form-group row">
-                    <label for="inputPassword3" classname="col-sm-2 col-form-label">Breed</label>
-                    <div classname="col-sm-10">
-                        <input type="text" classname="form-control" id="inputPassword3" placeholder="Breed of the pet"
-                         onChange={(e) => {
-                            setlostPetDetails({...lostPetDetails,breed:e.target.value});
-                          }}/>
-                    </div>
-                </div>
-                <div classname="form-group row">
-                    <label for="inputPassword3" classname="col-sm-2 col-form-label">Gender</label>
-                    <div classname="col-sm-10">
-                        <input type="text" classname="form-control" id="inputPassword3" placeholder="Pet Gender"
-                         onChange={(e) => {
-                            setlostPetDetails({...lostPetDetails,gender:e.target.value});
-                          }}/>
-                    </div>
-                </div>
-                <div classname="form-group row">
-                    <label for="inputPassword3" classname="col-sm-2 col-form-label">Color</label>
-                    <div classname="col-sm-10">
-                        <input type="text" classname="form-control" id="inputPassword3" placeholder=" describe pet Color"
-                        onChange={(e) => {
-                            setlostPetDetails({...lostPetDetails,color:e.target.value});
-                          }}/>
+            <form className="mt-5">
+                
+                <div className="form-group row m-3">
+                    <div className="col col-sm-5">
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend w-25">
+                                <div class="input-group-text">Pet Name </div>
+                            </div>
+                            <input type="text" className="form-control" id="inputEmail3" placeholder="Name of the pet"
+                                    onChange={(e) => {
+                                        setlostPetDetails({...lostPetDetails,pet_name:e.target.value});
+                                    }}/>
+                        </div>
                     </div>
                 </div>
 
-                <div classname="form-group row">
-                    <label for="inputPassword3" classname="col-sm-2 col-form-label">Last seen date</label>
-                    <div classname="col-sm-10">
-                        <input type="date" classname="form-control" id="inputPassword3" placeholder=" describe pet Color"
-                        onChange={(e) => {
-                            setlostPetDetails({...lostPetDetails,last_seen_date:e.target.value});
-                          }}/>
-                    </div>
-                </div>
-                <div classname="form-group row">
-                    <label for="inputPassword3" classname="col-sm-2 col-form-label">Last seen time</label>
-                    <div classname="col-sm-10">
-                        <input type="time" classname="form-control" id="inputPassword3" placeholder=" describe pet Color"
-                        onChange={(e) => {
-                            setlostPetDetails({...lostPetDetails,last_seen_time:e.target.value});
-                          }}/>
+                <div className="form-group row m-3">
+                    <div className="col col-sm-5">
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend w-25">
+                                <div class="input-group-text">Breed </div>
+                            </div>
+                            <input type="text" className="form-control" id="inputPassword3" placeholder="Breed of the pet"
+                                    onChange={(e) => {
+                                        setlostPetDetails({...lostPetDetails,breed:e.target.value});
+                                    }}/>
+                        </div>
                     </div>
                 </div>
 
-                <div classname="form-group row">
-                    <label for="inputPassword3" classname="col-sm-2 col-form-label">Photo</label>
-                    <div classname="col-sm-10">
-                    <input type='file' className="" onChange={onSelectFile} 
-                    />
-                        {selectedFile &&  <img src={preview} width="200" height="200"/> }
+                <div className="form-group row m-3">
+                    <div className="col col-sm-5">
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend w-25">
+                                <div class="input-group-text">Gender </div>
+                            </div>
+                              <select id="aligned-status" className="form-control" 
+                                    onChange={(e) => {
+                                        setlostPetDetails({...lostPetDetails,gender:e.target.value});
+                                    }}>
+                                    <option value="">Select Gender</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select> 
+                        </div>
                     </div>
                 </div>
 
-                <div classname="form-group row">
-                    <div classname="col-sm-10">
-                    <button type="submit" classname="btn btn-primary" onClick={enterLostPetInfo}>Submit</button>
+
+                <div className="form-group row m-3">
+                    <div className="col col-sm-5">
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend w-25">
+                                <div class="input-group-text">Color </div>
+                            </div>
+                            <input type="text" className="form-control" id="inputPassword3" placeholder=" describe pet Color"
+                                    onChange={(e) => {
+                                        setlostPetDetails({...lostPetDetails,color:e.target.value});
+                                    }}/>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="form-group row m-3">
+                    <div className="col col-sm-5">
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend w-25">
+                                <div class="input-group-text">Last Seen Date </div>
+                            </div>
+                            <input type="date" className="form-control" id="inputPassword3" placeholder=" describe pet Color"
+                                    onChange={(e) => {
+                                        setlostPetDetails({...lostPetDetails,last_seen_date:e.target.value});
+                                    }}/>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="form-group row m-3">
+                    <div className="col col-sm-5">
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend w-25">
+                                <div class="input-group-text">Last Seen Time </div>
+                            </div>
+                            <input type="date" className="form-control" id="inputPassword3" placeholder=" describe pet Color"
+                                    onChange={(e) => {
+                                        setlostPetDetails({...lostPetDetails,last_seen_time:e.target.value});
+                                    }}/>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="form-group row m-3">
+                    <div className="col col-sm-5">
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend w-25">
+                                <div class="input-group-text">Photo </div>
+                            </div>
+                            <input type='file' onChange={onSelectFile} 
+                            />
+                            {selectedFile &&  <img src={preview} className="m-auto" width="300" height="200"/> }
+                        </div>
+                    </div>
+                </div>
+
+         
+
+                <div className="form-group row m-3">
+                    <div className="col-sm-4">
+                    <button type="submit" className="btn btn-success m-3" onClick={enterLostPetInfo}>Submit</button>
+                    <button type="submit" className="btn btn-danger m-2" onClick={resetValues}>Cancel</button>
                     </div>
                 </div>          
             </form>    
