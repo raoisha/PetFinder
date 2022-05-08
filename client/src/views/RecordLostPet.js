@@ -1,75 +1,73 @@
 import React, { useState, Component, useEffect } from "react";
 import { useNavigate, Navigate} from 'react-router-dom';
 import Navigator from "../components/Navigator";
-import { useLoginValidate } from "../components/Validate";
 import Axios from "axios";
-import redirectLogin from "../components/redirectLogin";
+import {usePosition} from './usePosition';
 
 export default function RecordLostPet() {
+    const defaultValues = {
+        pet_name: "",
+        breed: "",
+        gender: "",
+        color: "",
+        last_seen_date: "",
+        last_seen_time: "",
+        latitude: "",
+        longitude: "",
+        pet_photo: "",
+    };
+    
+    const [lostPetDetails, setlostPetDetails] = useState(defaultValues);
+    const [selectedFile, setSelectedFile] = useState()
+    const [preview, setPreview] = useState()
+    const history = useNavigate();
+    const [message, setMessage] = useState("");
+    const {latitude, longitude, error} = usePosition();
+    
+    // create a preview as a side effect, whenever selected file is changed
+    useEffect(() => {
+        if (!selectedFile) {
+            setPreview(undefined)
+            return
+        }
+        const objectUrl = URL.createObjectURL(selectedFile)
+        setPreview(objectUrl)
 
-    const { loading, userData } = useLoginValidate();
-            const defaultValues = {
-                pet_name: "",
-                breed: "",
-                gender: "",
-                color: "",
-                last_seen_date: "",
-                last_seen_time: "",
-                last_seen_location: "",
-                pet_photo: "",
-            };
-           
-            const [lostPetDetails, setlostPetDetails] = useState(defaultValues);
-            const [selectedFile, setSelectedFile] = useState()
-            const [preview, setPreview] = useState()
-            const history = useNavigate();
-            const [message, setMessage] = useState("");
-           
-            // create a preview as a side effect, whenever selected file is changed
-            useEffect(() => {
-                if (!selectedFile) {
-                    setPreview(undefined)
-                    return
-                }
-                const objectUrl = URL.createObjectURL(selectedFile)
-                setPreview(objectUrl)
-        
-                // free memory when ever this component is unmounted
-                return () => URL.revokeObjectURL(objectUrl)
-            }, [selectedFile])
-        
-            const onSelectFile = e => {
-                if (!e.target.files || e.target.files.length === 0) {
-                    setSelectedFile(undefined)
-                    return
-                }
-                setlostPetDetails({...lostPetDetails, pet_photo:e.target.files[0]});
-                setSelectedFile(e.target.files[0])
-            }
+        // free memory when ever this component is unmounted
+        return () => URL.revokeObjectURL(objectUrl)
+    }, [selectedFile]);
 
-           
-        
+    const onSelectFile = e => {
+        if (!e.target.files || e.target.files.length === 0) {
+            setSelectedFile(undefined)
+            return
+        }
+        setlostPetDetails({...lostPetDetails, 
+            pet_photo: URL.createObjectURL(e.target.files[0])
+        });
+        setSelectedFile(e.target.files[0]);
+    }
+
     const enterLostPetInfo = () => {
-
+        let lat = latitude.toString();
+        let longit = longitude.toString();
+        lostPetDetails.latitude = lat;
+        lostPetDetails.longitude = longit;
         Axios.post("http://localhost:3001/lostpetinfo", {
             lostPetDetails,
         })
-          .then((response) => {
+        .then((response) => {
             setMessage("Pet details entered successfully.");
             alert("Pet details entered successfully.");
             setlostPetDetails(true);
             history.push('/home');
-          })
-          .catch((error) => {
+        })
+        .catch((error) => {
             setMessage(error.response.data.err);
             setlostPetDetails(false);
-          });
-
+        });
     };
-                
-      
-      
-    
+
     return (
          
         <div classname="row text-center">
@@ -127,16 +125,6 @@ export default function RecordLostPet() {
                         <input type="time" classname="form-control" id="inputPassword3" placeholder=" describe pet Color"
                         onChange={(e) => {
                             setlostPetDetails({...lostPetDetails,last_seen_time:e.target.value});
-                          }}/>
-                    </div>
-                </div>
-
-                <div classname="form-group row">
-                    <label for="inputPassword3" classname="col-sm-2 col-form-label">Last seen location</label>
-                    <div classname="col-sm-10">
-                        <input type="text" classname="form-control" id="inputPassword3" placeholder=" describe pet Color"
-                        onChange={(e) => {
-                            setlostPetDetails({...lostPetDetails,last_seen_location:e.target.value});
                           }}/>
                     </div>
                 </div>
