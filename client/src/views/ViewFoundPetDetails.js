@@ -1,7 +1,9 @@
 import Navigator from "../components/Navigator";
 function ViewFoundPetDetails() {
     return (
-        "view found pet details"
+        <Navigator></Navigator>
+        
+
     );
 }
 export default ViewFoundPetDetails;

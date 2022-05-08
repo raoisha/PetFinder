@@ -49,7 +49,18 @@ const lostPetInfo = (req, res) => {
     });
 }
 
-  
+const displayLostPetInfo = (req, res) => {
+
+  db.query(SQL_PET.READ_EVENT, (error, results, fields) => {
+      if (error) {
+        return console.error(error.message);
+      }
+      res.send(results[0]);
+  });
+}
+
+
 module.exports = {
     lostPetInfo,
+    displayLostPetInfo,
   };
