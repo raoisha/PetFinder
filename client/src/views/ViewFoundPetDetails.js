@@ -3,7 +3,7 @@ function ViewFoundPetDetails() {
     return (
         <Navigator></Navigator>
         
-
+ 
     );
 }
 export default ViewFoundPetDetails;

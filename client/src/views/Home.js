@@ -79,7 +79,7 @@ function Home() {
                                 <div class ="row">
                                     <div class="col-4"></div>
                                     <div class="col-4">
-                                        <Link to="/viewFoundPetDetails" className="btn btn-secondary btn-lg3">View Lost Pet Details</Link>
+                                        <Link to="/viewLostPetDetails" className="btn btn-secondary btn-lg3">View Lost Pet Details</Link>
                                     </div>
                                     <div class="col-4"></div>
                                 </div>
