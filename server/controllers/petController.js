@@ -51,7 +51,17 @@ const lostPetInfo = (req, res) => {
 
 const displayLostPetInfo = (req, res) => {
 
-  db.query(SQL_PET.READ_EVENT, (error, results, fields) => {
+  db.query(SQL_PET.DISPLAY_LOST_PET, (error, results, fields) => {
+      if (error) {
+        return console.error(error.message);
+      }
+      res.send(results);
+  });
+}
+
+const readLostPetDetail = (req, res) => {
+  let pet_id = req.params.id;
+  db.query(SQL_PET.READ_LOST_PET,[pet_id], (error, results, fields) => {
       if (error) {
         return console.error(error.message);
       }
@@ -63,4 +73,5 @@ const displayLostPetInfo = (req, res) => {
 module.exports = {
     lostPetInfo,
     displayLostPetInfo,
+    readLostPetDetail,
   };

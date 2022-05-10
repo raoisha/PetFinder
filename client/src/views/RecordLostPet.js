@@ -3,6 +3,7 @@ import { useNavigate, Navigate} from 'react-router-dom';
 import Navigator from "../components/Navigator";
 import Axios from "axios";
 import {usePosition} from './usePosition';
+import { useLoginValidate } from "../components/Validate";
 
 export default function RecordLostPet() {
     const defaultValues = {
@@ -17,6 +18,7 @@ export default function RecordLostPet() {
         pet_photo: "",
     };
 
+    const { loading, userData } = useLoginValidate();
     const [lostPetDetails, setlostPetDetails] = useState(defaultValues);
     const [selectedFile, setSelectedFile] = useState()
     const [preview, setPreview] = useState()
@@ -49,18 +51,20 @@ export default function RecordLostPet() {
     }
 
     const enterLostPetInfo = () => {
+        let userid = userData.user_id 
         let lat = latitude.toString();
         let longit = longitude.toString();
         lostPetDetails.latitude = lat;
         lostPetDetails.longitude = longit;
         Axios.post("http://localhost:3001/lostpetinfo", {
             lostPetDetails,
+            
         })
         .then((response) => {
             setMessage("Pet details entered successfully.");
             alert("Pet details entered successfully.");
             setlostPetDetails(true);
-            history.push('/home');
+            history('/home');
         })
         .catch((error) => {
             setMessage(error.response.data.err);
@@ -159,7 +163,7 @@ export default function RecordLostPet() {
                             <div class="input-group-prepend w-25">
                                 <div class="input-group-text">Last Seen Time </div>
                             </div>
-                            <input type="date" className="form-control" id="inputPassword3" placeholder=" describe pet Color"
+                            <input type="time" className="form-control" id="inputPassword3" placeholder=" describe pet Color"
                                     onChange={(e) => {
                                         setlostPetDetails({...lostPetDetails,last_seen_time:e.target.value});
                                     }}/>

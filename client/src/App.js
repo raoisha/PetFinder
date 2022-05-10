@@ -7,6 +7,7 @@ import ReportFoundPet from './views/ReportFoundPet';
 import RecordLostPet from './views/RecordLostPet';
 import ViewLostPetDetails from './views/ViewLostPetDetails';
 import ViewFoundPetDetails from './views/ViewFoundPetDetails';
+import LostPetInfo from './views/LostPetInfo';
 import Signin from './views/Signin';
 import Register from './views/Register';
 import Signout from './views/Signout'
@@ -21,7 +22,8 @@ function App() {
           <Route path="/reportFoundPet" element={<ReportFoundPet />} /> 
           <Route path="/recordLostPet" element={<RecordLostPet />} /> 
           <Route path="/viewLostPetDetails" element={<ViewLostPetDetails />} /> 
-          <Route path="/viewfoundPetDetails" element={<ViewFoundPetDetails />} />
+          <Route path="/viewLostPetDetails/:id" element={<LostPetInfo />} /> 
+          <Route path="/viewFoundPetDetails" element={<ViewFoundPetDetails />} />
           <Route path="/signin" element={<Signin />} /> 
           <Route path="/register" element={<Register />} /> 
           <Route path="/signout" element={<Signout />} /> 
