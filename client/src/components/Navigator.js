@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Navbar from 'react-bootstrap/Navbar';
-import dogimg from '../images/dogimg.jpeg';
+import dogimg from '../images/pawboost-logo-mobile.png';
 import { Link } from 'react-router-dom';
 import { useLoginValidate } from "./Validate";
 
@@ -16,11 +16,11 @@ function Navigator() {
     <div>
       <Container fluid>
         <Row>
-          <Navbar bg="dark" variant="dark">
+          <Navbar className="color-nav" variant="dark">
             <Container>
               <Navbar.Brand>
-              <img class="petlogo" src={dogimg} alt=" " width="100" height="100" align="left" />
-              <h2>Pet Finder</h2>
+                <img class="petlogo" src={dogimg} alt=" " width="100" height="100" align="left"/>
+                <h1 style={{ textAlign: "left" }}>Pet Finder</h1>
               </Navbar.Brand>
                 <Link to="/home" className="nav-link">
                     HOME

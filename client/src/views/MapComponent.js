@@ -12,7 +12,6 @@ const center = {
 };
 
 function MapComponent() {
-  debugger;
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
     googleMapsApiKey: "AIzaSyBdhAtwdikTOFo0qUpL_yS9Cc0mq4kNQPw"
@@ -21,14 +20,12 @@ function MapComponent() {
   const [map, setMap] = React.useState(null)
 
   const onLoad = React.useCallback(function callback(map) {
-    debugger;
     const bounds = new window.google.maps.LatLngBounds(center);
     map.fitBounds(bounds);
     setMap(map)
   }, [])
 
   const onUnmount = React.useCallback(function callback(map) {
-    debugger;
     setMap(null)
   }, [])
 

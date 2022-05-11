@@ -4,6 +4,7 @@ import Navigator from "../components/Navigator";
 import Axios from "axios";
 import {usePosition} from './usePosition';
 import { useLoginValidate } from "../components/Validate";
+import saddog from "../images/sad-dog.png"
 
 export default function RecordLostPet() {
     const defaultValues = {
@@ -17,6 +18,7 @@ export default function RecordLostPet() {
         longitude: "",
         pet_photo: "",
     };
+    const [record, setRecord] = useState(false);
 
     const { loading, userData } = useLoginValidate();
     const [lostPetDetails, setlostPetDetails] = useState(defaultValues);
@@ -64,13 +66,19 @@ export default function RecordLostPet() {
             setMessage("Pet details entered successfully.");
             alert("Pet details entered successfully.");
             setlostPetDetails(true);
-            history('/home');
+            setRecord(true);
+            
         })
         .catch((error) => {
             setMessage(error.response.data.err);
             setlostPetDetails(false);
         });
     };
+
+    if (record) {
+            return <Navigate to="/home"></Navigate>;
+      }
+    
 
     const resetValues=()=>{
         setlostPetDetails("");
@@ -80,111 +88,128 @@ export default function RecordLostPet() {
          
         <div className="row text-center">
             <Navigator></Navigator>
+            <div className ="lost-page-logo">
+            <img  src={saddog} alt=" " width="200" height="200" align="center"/>
+            </div>
             <form className="mt-5">
-                
-                <div className="form-group row m-3">
-                    <div className="col col-sm-5">
-                        <div class="input-group mb-2">
-                            <div class="input-group-prepend w-25">
-                                <div class="input-group-text">Pet Name </div>
+                <div className="row">
+                    <div className="col-4">
+                        <div className="form-group row m-2">
+                            <div className="col col-sm-10">
+                                <div class="input-group mb-2">
+                                    <div class="input-group-prepend w-25">
+                                        <div class="input-group-text">Pet Name</div>
+                                    </div>
+                                    <input type="text" className="form-control" id="inputEmail3" placeholder="Name of the pet"
+                                            onChange={(e) => {
+                                                setlostPetDetails({...lostPetDetails,pet_name:e.target.value});
+                                            }}/>
+                                </div>
                             </div>
-                            <input type="text" className="form-control" id="inputEmail3" placeholder="Name of the pet"
-                                    onChange={(e) => {
-                                        setlostPetDetails({...lostPetDetails,pet_name:e.target.value});
-                                    }}/>
+                        </div>
+                    </div>
+                    <div className="col-4">
+                        <div className="form-group row m-3">
+                            <div className="col col-sm-5">
+                                <div class="input-group mb-2">
+                                    <div class="input-group-prepend w-25">
+                                        <div class="input-group-text">Breed </div>
+                                    </div>
+                                    <input type="text" className="form-control" id="inputPassword3" placeholder="Breed of the pet"
+                                            onChange={(e) => {
+                                                setlostPetDetails({...lostPetDetails,breed:e.target.value});
+                                            }}/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-4">
+                        <div className="form-group row m-3">
+                            <div className="col col-sm-5">
+                                <div class="input-group mb-2">
+                                    <div class="input-group-prepend w-25">
+                                        <div class="input-group-text">Gender </div>
+                                    </div>
+                                    <select id="aligned-status" className="form-control" 
+                                            onChange={(e) => {
+                                                setlostPetDetails({...lostPetDetails,gender:e.target.value});
+                                            }}>
+                                            <option value="">Select Gender</option>
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                        </select> 
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-                <div className="form-group row m-3">
-                    <div className="col col-sm-5">
-                        <div class="input-group mb-2">
-                            <div class="input-group-prepend w-25">
-                                <div class="input-group-text">Breed </div>
+                <div className="row">
+                    <div className="col-4">
+                        <div className="form-group row m-3">
+                            <div className="col col-sm-5">
+                                <div class="input-group mb-2">
+                                    <div class="input-group-prepend w-25">
+                                        <div class="input-group-text">Color </div>
+                                    </div>
+                                    <input type="text" className="form-control" id="inputPassword3" placeholder=" describe pet Color"
+                                            onChange={(e) => {
+                                                setlostPetDetails({...lostPetDetails,color:e.target.value});
+                                            }}/>
+                                </div>
                             </div>
-                            <input type="text" className="form-control" id="inputPassword3" placeholder="Breed of the pet"
-                                    onChange={(e) => {
-                                        setlostPetDetails({...lostPetDetails,breed:e.target.value});
-                                    }}/>
                         </div>
                     </div>
-                </div>
-
-                <div className="form-group row m-3">
-                    <div className="col col-sm-5">
-                        <div class="input-group mb-2">
-                            <div class="input-group-prepend w-25">
-                                <div class="input-group-text">Gender </div>
+                    <div className="col-4">
+                        <div className="form-group row m-3">
+                            <div className="col col-sm-5">
+                                <div class="input-group mb-2">
+                                    <div class="input-group-prepend w-25">
+                                        <div class="input-group-text">Last Seen Date </div>
+                                    </div>
+                                    <input type="date" className="form-control" id="inputPassword3" placeholder=" describe pet Color"
+                                            onChange={(e) => {
+                                                setlostPetDetails({...lostPetDetails,last_seen_date:e.target.value});
+                                            }}/>
+                                </div>
                             </div>
-                              <select id="aligned-status" className="form-control" 
-                                    onChange={(e) => {
-                                        setlostPetDetails({...lostPetDetails,gender:e.target.value});
-                                    }}>
-                                    <option value="">Select Gender</option>
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>
-                                </select> 
                         </div>
                     </div>
-                </div>
-
-
-                <div className="form-group row m-3">
-                    <div className="col col-sm-5">
-                        <div class="input-group mb-2">
-                            <div class="input-group-prepend w-25">
-                                <div class="input-group-text">Color </div>
+                    <div className="col-4">
+                        <div className="form-group row m-3">
+                            <div className="col col-sm-5">
+                                <div class="input-group mb-2">
+                                    <div class="input-group-prepend w-25">
+                                        <div class="input-group-text">Last Seen Time </div>
+                                    </div>
+                                    <input type="time" className="form-control" id="inputPassword3" placeholder=" describe pet Color"
+                                            onChange={(e) => {
+                                                setlostPetDetails({...lostPetDetails,last_seen_time:e.target.value});
+                                            }}/>
+                                </div>
                             </div>
-                            <input type="text" className="form-control" id="inputPassword3" placeholder=" describe pet Color"
-                                    onChange={(e) => {
-                                        setlostPetDetails({...lostPetDetails,color:e.target.value});
-                                    }}/>
-                        </div>
+                        </div>   
                     </div>
                 </div>
-
-                <div className="form-group row m-3">
-                    <div className="col col-sm-5">
-                        <div class="input-group mb-2">
-                            <div class="input-group-prepend w-25">
-                                <div class="input-group-text">Last Seen Date </div>
+                <div className="row">
+                    <div className="col-4"></div>
+                    <div className="col-4">
+                        <div className="form-group row">
+                            <div className="col col-sm-5">
+                                <div class="input-group mb-2">
+                                    <div class="input-group-prepend w-25">
+                                        <div class="input-group-text">Photo </div>
+                                    </div>
+                                    <input type='file' onChange={onSelectFile} 
+                                    />
+                                    {selectedFile &&  <img src={preview} className="m-auto" width="300" height="200"/> }
+                                </div>
                             </div>
-                            <input type="date" className="form-control" id="inputPassword3" placeholder=" describe pet Color"
-                                    onChange={(e) => {
-                                        setlostPetDetails({...lostPetDetails,last_seen_date:e.target.value});
-                                    }}/>
                         </div>
                     </div>
+                    <div className="col-4"></div>
                 </div>
-
-                <div className="form-group row m-3">
-                    <div className="col col-sm-5">
-                        <div class="input-group mb-2">
-                            <div class="input-group-prepend w-25">
-                                <div class="input-group-text">Last Seen Time </div>
-                            </div>
-                            <input type="time" className="form-control" id="inputPassword3" placeholder=" describe pet Color"
-                                    onChange={(e) => {
-                                        setlostPetDetails({...lostPetDetails,last_seen_time:e.target.value});
-                                    }}/>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="form-group row m-3">
-                    <div className="col col-sm-5">
-                        <div class="input-group mb-2">
-                            <div class="input-group-prepend w-25">
-                                <div class="input-group-text">Photo </div>
-                            </div>
-                            <input type='file' onChange={onSelectFile} 
-                            />
-                            {selectedFile &&  <img src={preview} className="m-auto" width="300" height="200"/> }
-                        </div>
-                    </div>
-                </div>
-
          
+
 
                 <div className="form-group row m-3">
                     <div className="col-sm-4">
