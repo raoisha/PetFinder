@@ -52,15 +52,15 @@ function Signin() {
         <div className="card bg-light signin-card">
       
           <div className="card-header" style={{ textAlign: "center" , backgroundColor: "rgba(98,147,62,255)",color:"white", fontWeight:3}}>Have an Account?</div>
-          <div class="card-body">
-            <h5 class="card-title" style={{ textAlign: "center" }}>SIGN IN</h5>
-             <p class="card-text">
+          <div className="card-body">
+            <h5 className="card-title" style={{ textAlign: "center" }}>SIGN IN</h5>
+             <p className="card-text">
              <form className="">
                 <div className="form-group row justify-content-md-center">
                           <div className="col-8">
-                              <div class="input-group">
-                                  <div class="input-group-prepend">
-                                      <div class="input-group-text">Email ID </div>
+                              <div className="input-group">
+                                  <div className="input-group-prepend">
+                                      <div className="input-group-text">Email ID </div>
                                   </div>
                                   <input
                                       type="text"
@@ -75,9 +75,9 @@ function Signin() {
                 </div>
                 <div className="form-group row justify-content-md-center my-4">
                             <div className="col-8">
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text">Password</div>
+                                <div className="input-group">
+                                    <div className="input-group-prepend">
+                                        <div className="input-group-text">Password</div>
                                     </div>
                                     <input type="password" className="form-control" placeholder="Password"
                                     onChange={(e) => {

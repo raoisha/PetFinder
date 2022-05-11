@@ -24,13 +24,6 @@ function ViewLostPetDetails() {
         Axios.get('http://localhost:3001/displaylostpetinfo').then(function(res) {
             console.log(res);
             rows = res.data;
-            let arrayBuffer = res.data[0].photo.data;
-            let xyz = btoa(String.fromCharCode(...new Uint8Array(arrayBuffer)));
-            setmageFile(xyz);
-
-            let arrBuffer = res.data[0].photo.data;
-            bas = new Buffer.from(arrBuffer).toString('base64')
-
             setLoading(false);
         }).then(function(error) {
             console.log(error);
@@ -44,11 +37,11 @@ function ViewLostPetDetails() {
         <thead>
             <tr>
                 <th scope="col">Pet ID</th>
-                <th scope="col"> Pet Name</th>
+                <th scope="col">Pet Name</th>
                 <th scope="col">Pet Breed</th>
                 <th scope="col">Pet Gender</th>
                 <th scope="col">Pet Color</th>
-                <th scope="col"> Date</th>
+                <th scope="col">Date</th>
                 <th scope="col">Time</th>
                 <th scope="col">Photo</th>
             </tr>
@@ -63,7 +56,7 @@ function ViewLostPetDetails() {
                   <td>{res.color}</td>
                   <td>{res.last_seen_date}</td>
                   <td>{res.last_seen_time}</td>
-                  <td><img src={`data:image/png;base64,${bas}`} alt=""></img></td>
+                  <td><img src={res.photo} alt=""></img></td>
                 </tr>
             )}
         </tbody>

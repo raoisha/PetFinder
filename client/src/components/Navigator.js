@@ -19,7 +19,7 @@ function Navigator() {
           <Navbar className="color-nav" variant="dark">
             <Container>
               <Navbar.Brand>
-                <img class="petlogo" src={dogimg} alt=" " width="100" height="100" align="left"/>
+                <img className="petlogo" src={dogimg} alt=" " width="100" height="100" align="left"/>
                 <h1 style={{ textAlign: "left" }}>Pet Finder</h1>
               </Navbar.Brand>
                 <Link to="/home" className="nav-link">
