@@ -4,7 +4,18 @@ import Navigator from "../components/Navigator";
 import Axios from "axios";
 import {usePosition} from './usePosition';
 import { useLoginValidate } from "../components/Validate";
-import saddog from "../images/sad-dog.png"
+import saddog from "../images/sad-dog.png";
+
+function getBase64(file, cb) {
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function () {
+        cb(reader.result)
+    };
+    reader.onerror = function (error) {
+        console.log('Error: ', error);
+    };
+}
 
 export default function RecordLostPet() {
     const defaultValues = {
@@ -34,8 +45,11 @@ export default function RecordLostPet() {
             setPreview(undefined)
             return
         }
-        const objectUrl = URL.createObjectURL(selectedFile)
-        setPreview(objectUrl)
+        const objectUrl = URL.createObjectURL(selectedFile);
+        /*setlostPetDetails({...lostPetDetails, 
+            pet_photo: objectUrl
+        });*/
+        setPreview(objectUrl);
 
         // free memory when ever this component is unmounted
         return () => URL.revokeObjectURL(objectUrl)
@@ -46,9 +60,17 @@ export default function RecordLostPet() {
             setSelectedFile(undefined)
             return
         }
-        setlostPetDetails({...lostPetDetails, 
-            pet_photo: URL.createObjectURL(e.target.files[0])
+        debugger;
+
+        let idCardBase64 = '';
+        getBase64(e.target.files[0], (result) => {
+            debugger;
+            idCardBase64 = result;
+            setlostPetDetails({...lostPetDetails, 
+                pet_photo: result
+            });
         });
+
         setSelectedFile(e.target.files[0]);
     }
 
@@ -58,6 +80,7 @@ export default function RecordLostPet() {
         let longit = longitude.toString();
         lostPetDetails.latitude = lat;
         lostPetDetails.longitude = longit;
+        debugger;
         Axios.post("http://localhost:3001/lostpetinfo", {
             lostPetDetails,
             
@@ -98,9 +121,9 @@ export default function RecordLostPet() {
                     <div className="col-4">
                         <div className="form-group row mx-5">
                             <div className="col">
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text">Pet Name</div>
+                                <div className="input-group">
+                                    <div className="input-group-prepend">
+                                        <div className="input-group-text">Pet Name</div>
                                     </div>
                                     <input type="text" className="form-control" id="inputEmail3" placeholder="Name of the pet"
                                             onChange={(e) => {
@@ -113,9 +136,9 @@ export default function RecordLostPet() {
                     <div className="col-4">
                         <div className="form-group row mx-5">
                             <div className="col">
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text">Breed </div>
+                                <div className="input-group">
+                                    <div className="input-group-prepend">
+                                        <div className="input-group-text">Breed </div>
                                     </div>
                                     <input type="text" className="form-control" id="inputPassword3" placeholder="Breed of the pet"
                                             onChange={(e) => {
@@ -128,9 +151,9 @@ export default function RecordLostPet() {
                     <div className="col-4">
                         <div className="form-group row mx-5">
                             <div className="col">
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text">Gender </div>
+                                <div className="input-group">
+                                    <div className="input-group-prepend">
+                                        <div className="input-group-text">Gender </div>
                                     </div>
                                     <select id="aligned-status" className="form-control" 
                                             onChange={(e) => {
@@ -149,9 +172,9 @@ export default function RecordLostPet() {
                     <div className="col-4">
                         <div className="form-group row mx-5">
                             <div className="col">
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text">Color </div>
+                                <div className="input-group">
+                                    <div className="input-group-prepend">
+                                        <div className="input-group-text">Color </div>
                                     </div>
                                     <input type="text" className="form-control" id="inputPassword3" placeholder=" describe pet Color"
                                             onChange={(e) => {
@@ -164,9 +187,9 @@ export default function RecordLostPet() {
                     <div className="col-4">
                         <div className="form-group row mx-5">
                             <div className="col">
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text">Last Seen Date </div>
+                                <div className="input-group">
+                                    <div className="input-group-prepend">
+                                        <div className="input-group-text">Last Seen Date </div>
                                     </div>
                                     <input type="date" className="form-control" id="inputPassword3" placeholder="last seen date"
                                             onChange={(e) => {
@@ -179,9 +202,9 @@ export default function RecordLostPet() {
                     <div className="col-4">
                         <div className="form-group row mx-5">
                             <div className="col">
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text">Last Seen Time </div>
+                                <div className="input-group">
+                                    <div className="input-group-prepend">
+                                        <div className="input-group-text">Last Seen Time </div>
                                     </div>
                                     <input type="time" className="form-control" id="inputPassword3" placeholder="last seen time"
                                             onChange={(e) => {
@@ -197,9 +220,9 @@ export default function RecordLostPet() {
                     <div className="col-4">
                         <div className="form-group row">
                             <div className="col">
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text">Photo </div>
+                                <div className="input-group">
+                                    <div className="input-group-prepend">
+                                        <div className="input-group-text">Photo </div>
                                     </div>
                                     <input type='file' onChange={onSelectFile} 
                                     />
