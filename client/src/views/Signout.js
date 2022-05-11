@@ -20,7 +20,7 @@ const Signout = () => {
         <div className="main">
           <h1 style={{textAlign:"center"}}>Successfully logged out</h1>
         </div>
-        <Link to="/" className="button-xlarge pure-button">Go to Home Page</Link>
+        <Link to="/home" style={{textAlign:"center"}} className="button-xlarge pure-button">Go To Home Page</Link>
       </>
     );
   }else{

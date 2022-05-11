@@ -45,38 +45,63 @@ function Signin() {
 
 
   return (
-    <div>
+    <div className="login-page">
     <Navigator></Navigator>
-    <form className="flight-book-form">
-      <div className="login-form-box">
-        <div className="login-form" style={{ color: "white" }}>
-          <h2 className="heading-section text-center">Sign In</h2>
-          <h3 className="mb-4 text-center">Have an account?</h3>
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Username"
-            onChange={(e) => {
-              setEmailId(e.target.value);
-            }}
-          />
-          <br />
-          <input type="password" className="form-control" placeholder="Password"
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
-          />
-          <br />
-          <button type="button" className="btn btn-primary" onClick={login}>
-            <h4>Sign In</h4>
-          </button>
-          <br />
+    <form className="row justify-content-md-center my-5">
+      <div className="col-5 my-5">
+        <div className="card bg-light signin-card">
+      
+          <div className="card-header" style={{ textAlign: "center" , backgroundColor: "rgba(98,147,62,255)",color:"white", fontWeight:3}}>Have an Account?</div>
+          <div class="card-body">
+            <h5 class="card-title" style={{ textAlign: "center" }}>SIGN IN</h5>
+             <p class="card-text">
+             <form className="">
+                <div className="form-group row justify-content-md-center">
+                          <div className="col-8">
+                              <div class="input-group">
+                                  <div class="input-group-prepend">
+                                      <div class="input-group-text">Email ID </div>
+                                  </div>
+                                  <input
+                                      type="text"
+                                  className="form-control"
+                                  placeholder="Username"
+                                  onChange={(e) => {
+                                  setEmailId(e.target.value);
+                                  }}
+                                />
+                              </div>
+                          </div>
+                </div>
+                <div className="form-group row justify-content-md-center my-4">
+                            <div className="col-8">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">Password</div>
+                                    </div>
+                                    <input type="password" className="form-control" placeholder="Password"
+                                    onChange={(e) => {
+                                      setPassword(e.target.value);
+                                    }}
+                                  />
+                                </div>
+                            </div>
+                </div>
+                <div className="form-group row justify-content-md-center">
+                      <div className="col-2">
+                        <button type="button" className="btn btn-primary" onClick={login}>SIGN IN</button>
+                      </div>
+                </div>   
+          </form>
           <p className="w-100 text-center">
-            &mdash; Haven't registered yet &mdash;
+            &mdash; Haven't Registered Yet &mdash;
           </p>
-          <a href="register">
-            <h4 style={{ color: "black", textAlign: "center" }}>Register</h4>
-          </a>
+            <a href="register">
+              <h5 style={{ textAlign: "center" }}>REGISTER</h5>
+            </a>
+          </p>
+          </div>
+         
         </div>
       </div>
     </form>

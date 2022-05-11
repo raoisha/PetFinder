@@ -60,7 +60,7 @@ function Register() {
       alert("Space character not allowed in zip_code, password, email_id");
       setMessage("Space character not allowed in zip_code, password, email_id");
     } else {
-      alert("Entered");
+
       setMessage("User has been successfully registered");
       Axios.post("http://localhost:3001/register", {
         userDetails,
@@ -68,7 +68,7 @@ function Register() {
      .then((response) => {
         debugger;
         setMessage(
-          `Your User ID is "${response.emailid}"`
+          `Your login ID is "${response.emailid}"`
         );
         setRegisterd(true);
       })
@@ -77,9 +77,12 @@ function Register() {
 
   if (registered) {
     return (
-      <form className="flight-book-form">
+      <form className="register-form">
+        <Navigator></Navigator>
         <div className="main">
-          <h1 style={{ textAlign: "center" }}> {message}</h1>
+        <br />
+        <br />
+          <h1 style={{ textAlign: "center", color: "white" }}> {message}</h1>
           <br />
           <Link to="/signin" style={{ fontSize: 35, textAlign: "center" }}>
             <h1>Go to Login Page</h1>
@@ -90,11 +93,12 @@ function Register() {
   }
 
   return (
-    <form className="flight-book-form">
+    <form className="register-form">
       <Navigator></Navigator>
-      <div className="login-form" style={{ color: "black" }}>
+      <div className="login-form" style={{ color: "white" }}>
         <Container>
-          <h2 className="mb-4 text-center">Fill your details</h2>
+          <br></br>
+          <h2 className="mb-4 text-center">Please Enter your details</h2>
           <Form>
             <div className="row">
               <Form.Group className="col">
@@ -145,7 +149,7 @@ function Register() {
             </div>
             <div className="row">
               <Form.Group className="col">
-                <Form.Label>Email address</Form.Label>
+                <Form.Label>Email Address</Form.Label>
                 <Form.Control
                   required
                   helpertext={invalid.emailid ? "1-25 characters" : ""}
@@ -163,7 +167,7 @@ function Register() {
                 />
               </Form.Group>
               <Form.Group className="col">
-                <Form.Label>password</Form.Label>
+                <Form.Label>Password</Form.Label>
                 <Form.Control
                   required
                   helpertext="Minimum 5 & Maximum 25 characters"
@@ -206,7 +210,7 @@ function Register() {
               />
             </Form.Group>
               <Form.Group className="col">
-                <Form.Label>phone Number</Form.Label>
+                <Form.Label>Phone Number</Form.Label>
                 <Form.Control
                   required
                   helpertext={invalid.address ? "1-25 characters" : ""}
@@ -312,8 +316,8 @@ function Register() {
            
             <br />
             <div>
-              <button type="submit" onClick={register}>
-                <h4>Signup</h4>
+              <button type="submit" className="btn btn-primary reg-form"  onClick={register}>
+                REGISTER
               </button>
             </div>
           </Form>

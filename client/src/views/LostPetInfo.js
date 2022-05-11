@@ -7,6 +7,43 @@ import MapComponent from "./MapComponent";
 
 let details = {};
 
+// public method for encoding an Uint8Array to base64
+function encode (input) {
+  var keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+  var output = "";
+  var chr1, chr2, chr3, enc1, enc2, enc3, enc4;
+  var i = 0;
+
+  while (i < input.length) {
+      chr1 = input[i++];
+      chr2 = i < input.length ? input[i++] : Number.NaN; // Not sure if the index 
+      chr3 = i < input.length ? input[i++] : Number.NaN; // checks are needed here
+
+      enc1 = chr1 >> 2;
+      enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);
+      enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
+      enc4 = chr3 & 63;
+
+      if (isNaN(chr2)) {
+          enc3 = enc4 = 64;
+      } else if (isNaN(chr3)) {
+          enc4 = 64;
+      }
+      output += keyStr.charAt(enc1) + keyStr.charAt(enc2) +
+                keyStr.charAt(enc3) + keyStr.charAt(enc4);
+  }
+  return output;
+}
+
+function _arrayBufferToBase64( buffer ) {
+  var binary = '';
+  var bytes = new Uint8Array( buffer );
+  var len = bytes.byteLength;
+  for (var i = 0; i < len; i++) {
+     binary += String.fromCharCode( bytes[ i ] );
+  }
+  return window.btoa( binary );
+}
 
 function LostPetInfo() {
   Axios.defaults.withCredentials = true;
@@ -20,10 +57,9 @@ function LostPetInfo() {
         details = res.data;
         setLoading(false);
 
-       
-        let arrBuffer = res.data[0].photo.data;
-        const bas = new Uint8Array(arrBuffer);
-        setmageFile(bas);
+       debugger;
+        let blob = res.data.photo.data;
+        setmageFile(_arrayBufferToBase64(blob));
          
 
 
@@ -64,7 +100,8 @@ function LostPetInfo() {
 
             <div className="pure-control-group">
             <label htmlFor="aligned-name">Photo :</label>
-            <label id="aligned-name"><img src={`data:image/png;base64,${bas}`} alt=""></img></label>
+            <label id="aligned-name">
+              <img className="pet-photo" src={`data:image/png;base64, ${bas}`} alt=""></img></label>
             </div>
 
            
