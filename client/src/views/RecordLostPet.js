@@ -86,18 +86,20 @@ export default function RecordLostPet() {
 
     return (
          
-        <div className="row text-center">
+        <div>
             <Navigator></Navigator>
-            <div className ="lost-page-logo">
-            <img  src={saddog} alt=" " width="200" height="200" align="center"/>
+            <div className="row justify-content-md-center lost-page-logo">
+                <div className ="col-2">
+                    <img  src={saddog} alt=" " width="200" height="200" align="center"/>
+                </div>
             </div>
-            <form className="mt-5">
+            <form className="lost-pet-page mt-5">
                 <div className="row">
                     <div className="col-4">
-                        <div className="form-group row m-2">
-                            <div className="col col-sm-10">
-                                <div class="input-group mb-2">
-                                    <div class="input-group-prepend w-25">
+                        <div className="form-group row mx-5">
+                            <div className="col">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
                                         <div class="input-group-text">Pet Name</div>
                                     </div>
                                     <input type="text" className="form-control" id="inputEmail3" placeholder="Name of the pet"
@@ -109,10 +111,10 @@ export default function RecordLostPet() {
                         </div>
                     </div>
                     <div className="col-4">
-                        <div className="form-group row m-3">
-                            <div className="col col-sm-5">
-                                <div class="input-group mb-2">
-                                    <div class="input-group-prepend w-25">
+                        <div className="form-group row mx-5">
+                            <div className="col">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
                                         <div class="input-group-text">Breed </div>
                                     </div>
                                     <input type="text" className="form-control" id="inputPassword3" placeholder="Breed of the pet"
@@ -124,10 +126,10 @@ export default function RecordLostPet() {
                         </div>
                     </div>
                     <div className="col-4">
-                        <div className="form-group row m-3">
-                            <div className="col col-sm-5">
-                                <div class="input-group mb-2">
-                                    <div class="input-group-prepend w-25">
+                        <div className="form-group row mx-5">
+                            <div className="col">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
                                         <div class="input-group-text">Gender </div>
                                     </div>
                                     <select id="aligned-status" className="form-control" 
@@ -143,12 +145,12 @@ export default function RecordLostPet() {
                         </div>
                     </div>
                 </div>
-                <div className="row">
+                <div className="row mt-5">
                     <div className="col-4">
-                        <div className="form-group row m-3">
-                            <div className="col col-sm-5">
-                                <div class="input-group mb-2">
-                                    <div class="input-group-prepend w-25">
+                        <div className="form-group row mx-5">
+                            <div className="col">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
                                         <div class="input-group-text">Color </div>
                                     </div>
                                     <input type="text" className="form-control" id="inputPassword3" placeholder=" describe pet Color"
@@ -160,13 +162,13 @@ export default function RecordLostPet() {
                         </div>
                     </div>
                     <div className="col-4">
-                        <div className="form-group row m-3">
-                            <div className="col col-sm-5">
-                                <div class="input-group mb-2">
-                                    <div class="input-group-prepend w-25">
+                        <div className="form-group row mx-5">
+                            <div className="col">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
                                         <div class="input-group-text">Last Seen Date </div>
                                     </div>
-                                    <input type="date" className="form-control" id="inputPassword3" placeholder=" describe pet Color"
+                                    <input type="date" className="form-control" id="inputPassword3" placeholder="last seen date"
                                             onChange={(e) => {
                                                 setlostPetDetails({...lostPetDetails,last_seen_date:e.target.value});
                                             }}/>
@@ -175,13 +177,13 @@ export default function RecordLostPet() {
                         </div>
                     </div>
                     <div className="col-4">
-                        <div className="form-group row m-3">
-                            <div className="col col-sm-5">
-                                <div class="input-group mb-2">
-                                    <div class="input-group-prepend w-25">
+                        <div className="form-group row mx-5">
+                            <div className="col">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
                                         <div class="input-group-text">Last Seen Time </div>
                                     </div>
-                                    <input type="time" className="form-control" id="inputPassword3" placeholder=" describe pet Color"
+                                    <input type="time" className="form-control" id="inputPassword3" placeholder="last seen time"
                                             onChange={(e) => {
                                                 setlostPetDetails({...lostPetDetails,last_seen_time:e.target.value});
                                             }}/>
@@ -190,13 +192,13 @@ export default function RecordLostPet() {
                         </div>   
                     </div>
                 </div>
-                <div className="row">
+                <div className="row mt-5">
                     <div className="col-4"></div>
                     <div className="col-4">
                         <div className="form-group row">
-                            <div className="col col-sm-5">
-                                <div class="input-group mb-2">
-                                    <div class="input-group-prepend w-25">
+                            <div className="col">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
                                         <div class="input-group-text">Photo </div>
                                     </div>
                                     <input type='file' onChange={onSelectFile} 
@@ -208,11 +210,9 @@ export default function RecordLostPet() {
                     </div>
                     <div className="col-4"></div>
                 </div>
-         
 
-
-                <div className="form-group row m-3">
-                    <div className="col-sm-4">
+                <div className="form-group row  justify-content-md-center mt-5">
+                    <div className="col-sm-2">
                     <button type="submit" className="btn btn-success m-3" onClick={enterLostPetInfo}>Submit</button>
                     <button type="submit" className="btn btn-danger m-2" onClick={resetValues}>Cancel</button>
                     </div>
