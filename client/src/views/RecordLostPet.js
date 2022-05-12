@@ -5,6 +5,7 @@ import Axios from "axios";
 import {usePosition} from './usePosition';
 import { useLoginValidate } from "../components/Validate";
 import saddog from "../images/sad-dog.png";
+import redirectLogin from "../components/redirectLogin";
 
 function getBase64(file, cb) {
     let reader = new FileReader();
@@ -29,6 +30,9 @@ export default function RecordLostPet() {
         longitude: "",
         pet_photo: "",
     };
+
+    const user_id = sessionStorage.getItem('user_id');
+    
     const [record, setRecord] = useState(false);
 
     const { loading, userData } = useLoginValidate();
@@ -54,6 +58,11 @@ export default function RecordLostPet() {
         // free memory when ever this component is unmounted
         return () => URL.revokeObjectURL(objectUrl)
     }, [selectedFile]);
+
+    if (!user_id || user_id === '') {
+        return redirectLogin();
+    } else {
+        Axios.defaults.withCredentials = true;
 
     const onSelectFile = e => {
         if (!e.target.files || e.target.files.length === 0) {
@@ -84,18 +93,19 @@ export default function RecordLostPet() {
         lostPetDetails.color.trim() === "" )
         {
             alert("please enter pet name")
-        }else{
+        } else
+        {
+
+        alert("Pet details entered successfully.");
+        setMessage("Pet details entered successfully.");
+        setRecord(true)
         Axios.post("http://localhost:3001/lostpetinfo", {
             lostPetDetails,
             userid,
             
         }).then((response) => {
-            console.log(response);
-            alert("Pet details entered successfully.");
-            history("/home");
-            setMessage("Pet details entered successfully.");
-            setlostPetDetails(true);
-            
+            console.log(response); 
+           
         })
         .catch((error) => {
             setMessage(error.response.data.err);
@@ -106,6 +116,9 @@ export default function RecordLostPet() {
 
     
     
+  if (record) {
+    return <Navigate to="/home"></Navigate>;
+  }
 
     const resetValues=()=>{
         setlostPetDetails("");
@@ -248,4 +261,5 @@ export default function RecordLostPet() {
         </div>
  
     );
+   }
 }

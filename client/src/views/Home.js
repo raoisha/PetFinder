@@ -12,12 +12,6 @@ import { useLoginValidate } from "../components/Validate";
 
 function Home() {
 
-    const { loading, userData } = useLoginValidate();
-    if(userData.user_id){
-        <h1 className="app-heading" style={{ color: "black" }}>Hi {userData.fname}</h1>
-    }
-
-
   return ( 
     <div className="shoe-container mx-auto hero-pattern">
         <Navigator></Navigator>

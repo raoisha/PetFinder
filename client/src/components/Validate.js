@@ -11,6 +11,7 @@ export const useLoginValidate = () => {
     axios.get("http://localhost:3001/signin").then((response) => {
         if (response.data.loggedIn === true) {
           setUserData(response.data.user);
+          sessionStorage.setItem('user_id', response.data.user.user_id);
         } else {
           setUserData({});
         }

@@ -110,7 +110,7 @@ function ViewFoundPetDetails() {
     }, []);
  
     return (
-        <div>
+        <div className="lost-pet-list">
             <Navigator></Navigator>
 
             {loading ? (

@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from "react";
 import Axios from "axios";
-import { useParams} from 'react-router-dom';
+import { useParams,Link} from 'react-router-dom';
 import Navigator from "../components/Navigator";
 import MapComponent from "./MapComponent";
 import {faEnvelope } from "@fortawesome/free-solid-svg-icons";
@@ -17,6 +17,7 @@ function LostPetInfo() {
   let { id } = useParams();
   const [basi, setmageFile] = useState()
   const [message, setMessage] = useState("");
+  const [mail, setMail] = useState(false);
 
   useEffect(() => {
     Axios.get('http://localhost:3001/readLostPetDetail/'+ id).then(function(res) {
@@ -30,27 +31,57 @@ function LostPetInfo() {
 
    const sendEmailToOwner=()=>{
     let pet_id = details.pet_id ;
+    setMessage("Email has been Successfully sent to the Owner of the pet"); 
+    setMail(true);
     Axios.post("http://localhost:3001/sendemail", {
       pet_id,
     }).then((response) => {
-      setMessage("email successfully sent"); 
+      console.log(response)
+      setMessage("Email has been Successfully sent to the Owner of the pet"); 
   })
   .catch((error) => {
       setMessage(error.response.data.err);
   });
 }
-  
+if (mail) {
+  return (
+    <form className="register-form">
+      <Navigator></Navigator>
+      <div className="main">
+      <br />
+      <br />
+        <h1 style={{ textAlign: "center", color: "white" }}> {message}</h1>
+        <h1 style={{ textAlign: "center", color: "white" }}> You can also reach out to the Owner on +1 {details.phonenumber}</h1>
+        <h1 style={{ textAlign: "center", color: "white" }}> Thank you for Your Response</h1>
+      
+        <br />
+        <Link to="/signin" style={{ fontSize: 35, textAlign: "center" }}>
+          <h1>Return to Home Page</h1>
+        </Link>
+      </div>
+    </form>
+  );
+}
   return (
     <div className="lost-pet-info">
          <Navigator></Navigator>
          <div className="row justify-content-md-center mt-5">
            <div className="col-6">
              <div className="row justify-content-md-center">
-               <div className="col-7 lost-pet-photo">
+               <div className="col-5 lost-pet-photo">
                 <label id="aligned-name">
                   <img className="pet-photo" src={details.photo} alt=""></img></label>
                </div>
              </div>
+             <div className="row pure-u-1-3 mt-2 justify-content-md-center">
+               <div className="col pure-control-group " style={{ textAlign: "center" }}>
+ 
+                <label htmlFor="aligned-name">Pet Owner : </label>
+                <label id="aligned-name"  className="mx-3">{details.fname} {details.lname}</label>
+             
+               </div>
+             </div>
+  
              <div className="row justify-content-md-center mt-3">
                <div className="col-3">
                   <button className="btn btn-primary btn-mail"  onClick={sendEmailToOwner}>

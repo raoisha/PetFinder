@@ -50,14 +50,17 @@ function FoundPetInfo() {
                   <img className="pet-photo" src={details.photo} alt=""></img></label>
                </div>
              </div>
-             <div className="row justify-content-md-center mt-3">
-               <div className="col-3">
-                  <button className="btn btn-primary btn-mail"  onClick={sendEmailToOwner}>
-                    <FontAwesomeIcon icon={faEnvelope} />   
-                    <span className="mx-2">Contact Owner</span>
-                   </button>
+             <div className="row justify-content-md-center">
+               <div className="col-6 lost-pet-photo">
+                <label id="aligned-name" style={{ color:"#074985"}}>Pet Founded By {details.fname} {details.lname}</label>
                </div>
              </div>
+             <div className="row justify-content-md-center">
+               <div className="col-8 lost-pet-photo" my-2>
+                <label id="aligned-name" style={{ color: "#074985" }}>Contact +1 {details.phonenumber} for more info </label>
+               </div>
+             </div>
+ 
            </div>
            <div className="col-6">
              <div className="row pure-u-1-3">
@@ -75,7 +78,7 @@ function FoundPetInfo() {
              <div className="row pure-u-1-3 mt-2">
                <div className="pure-control-group">
                   <label htmlFor="aligned-name">Last seen Date : </label>
-                  <label id="aligned-name"  className="mx-3">{details.last_seen_date}</label>
+                  <label id="aligned-name" className="mx-3">{details.last_seen_date}</label>
                </div>
              </div>
              <div className="row pure-u-1-3 mt-2">

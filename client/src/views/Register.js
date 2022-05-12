@@ -56,10 +56,15 @@ function Register() {
       userDetails.zip_code.includes(" ") ||
       userDetails.password.includes(" ")
     ) {
-      console.log("Entered");
       alert("Space character not allowed in zip_code, password, email_id");
       setMessage("Space character not allowed in zip_code, password, email_id");
-    } else {
+    } else if (
+      userDetails.phonenumber.length > 10 ||
+      userDetails.phonenumber.length < 10 
+    ) {
+      alert("Mobile number should be of 10 digits");
+      setMessage("Mobile number should be of 10 digits");
+    }else {
 
       setMessage("User has been successfully registered");
       Axios.post("http://localhost:3001/register", {
@@ -155,7 +160,7 @@ function Register() {
                   helpertext={invalid.emailid ? "1-25 characters" : ""}
                   id="register-email-id"
                   label="Email ID"
-                  type="text"
+                  type="email"
                   error={invalid.email_id}
                   onChange={(e) => {
                     const validation = !!(
