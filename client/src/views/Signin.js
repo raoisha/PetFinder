@@ -26,7 +26,7 @@ function Signin() {
       setMessage("Please enter username and password");
       alert("Please Enter Username/Password")
     } 
- 
+ else {
     Axios.post("http://localhost:3001/signin", {
       emailid: emailid,
       password: password,
@@ -39,7 +39,9 @@ function Signin() {
         setLoginStatus(false);
         setFailMsg(error.response.data.err);
       });
+ }
   };
+
  
   
 
@@ -75,6 +77,7 @@ function Signin() {
                                   <input
                                       type="text"
                                   className="form-control"
+                                  id="inputEmail"
                                   placeholder="Username"
                                   onChange={(e) => {
                                   setEmailId(e.target.value);
@@ -89,7 +92,7 @@ function Signin() {
                                     <div className="input-group-prepend">
                                         <div className="input-group-text">Password</div>
                                     </div>
-                                    <input type="password" className="form-control" placeholder="Password"
+                                    <input type="password" className="form-control" id="inputPassword" placeholder="Password"
                                     onChange={(e) => {
                                       setPassword(e.target.value);
                                     }}
@@ -99,7 +102,7 @@ function Signin() {
                 </div>
                 <div className="form-group row justify-content-md-center">
                       <div className="col-2">
-                        <button type="button" className="btn btn-primary" onClick={login}>SIGN IN</button>
+                        <button type="button" className="btn btn-primary" id="Signin" onClick={login}>SIGN IN</button>
                       </div>
                 </div>   
           </form>

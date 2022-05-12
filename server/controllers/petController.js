@@ -48,8 +48,8 @@ const lostPetInfo = (req, res) => {
                 db.rollback();
                 return;
               }
-              res.success(result);
-              //res.send(result);
+             
+              res.send(result);
             })
 
             
