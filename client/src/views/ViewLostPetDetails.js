@@ -5,7 +5,6 @@ import Axios from "axios";
 import ReactPaginate from 'react-paginate';
 
 var rows = [];
-var items = [1,2,3,4,5,6,7,8,9,0,11,12];
 function Items({ currentItems, history }) {
 
     const itemClick = (event) =>{
@@ -45,12 +44,12 @@ function PaginatedItems({ itemsPerPage, rowsItem, history }) {
       console.log(`Loading items from ${itemOffset} to ${endOffset}`);
       let itemsRow = rowsItem.slice(itemOffset, endOffset);
       setCurrentItems(itemsRow);
-      setPageCount(Math.ceil(items.length / itemsPerPage));
+      setPageCount(Math.ceil(rowsItem.length / itemsPerPage));
     }, [itemOffset, itemsPerPage]);
   
     // Invoke when user click to request another page.
     const handlePageClick = (event) => {
-      const newOffset = (event.selected * itemsPerPage) % items.length;
+      const newOffset = (event.selected * itemsPerPage) % rowsItem.length;
       console.log(
         `User requested page number ${event.selected}, which is offset ${newOffset}`
       );
@@ -63,7 +62,7 @@ function PaginatedItems({ itemsPerPage, rowsItem, history }) {
             <Items currentItems={currentItems} history={history}/>
         </div>
         <div className="row justify-content-md-center">
-            <div className="col-3">
+            <div className="col-4">
                 <ReactPaginate
                     nextLabel="next >"
                     onPageChange={handlePageClick}
@@ -113,7 +112,7 @@ function ViewLostPetDetails() {
     }, []);
  
     return (
-        <div>
+        <div className="lost-pet-list">
             <Navigator></Navigator>
             {loading ? (
         <div className="text-center">

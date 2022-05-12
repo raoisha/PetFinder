@@ -78,6 +78,7 @@ const readLostPetDetail = (req, res) => {
 
 
 const foundPetInfo = (req, res) => {
+  user_id= req.body.userid;
   const {
       pet_name,
       pet_description,
@@ -90,7 +91,7 @@ const foundPetInfo = (req, res) => {
   
   db.query(
       SQL_PET.FOUND_PET_INFO,
-      [
+      [   user_id,
           pet_name,
           pet_description,
           last_seen_date,

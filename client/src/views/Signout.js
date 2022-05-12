@@ -9,22 +9,30 @@ const Signout = () => {
   useEffect(() => {
     Axios.get("http://localhost:3001/signout").then((response) => {
       console.log("logged out");
+      sessionStorage.setItem('user_id', '');
       setLoggedout(true);
     });
   }, []);
   if(loggedOut){
     return (
-      <>
+      <div className="register-form">
       <Navigator></Navigator>
         <div className="main">
           <h1 style={{textAlign:"center"}}>Successfully logged out</h1>
         </div>
-        <Link to="/home" className="return-to-home mx-5">Return To Home Page</Link>
-      </>
+        <div className="row justify-content-md-center">
+          <div className="col-3">
+            <Link to="/home" className="return-to-home mx-5" style={{fontsize:"30"}}>Return To Home Page</Link>
+          </div>
+          
+        </div>
+        
+      </div>
     );
   }else{
     return <><Navigator></Navigator>Please try again.</>
   }
+  
 };
 
 export default Signout;
