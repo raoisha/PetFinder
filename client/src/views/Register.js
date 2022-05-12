@@ -68,7 +68,7 @@ function Register() {
      .then((response) => {
   
         setMessage(
-          `Your login ID is "${response.emailid}"`
+          `Your login ID is "${response.data}"`
         );
         setRegisterd(true);
       })

@@ -8,7 +8,6 @@ const SQL_PET = {
 
 };
 
-
 module.exports = SQL_PET;
 
 
