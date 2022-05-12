@@ -106,10 +106,9 @@ const setLogin = (req, res) => {
                   return;
                 }
               
-              const data = {
-                emailid: emailid,
-              };
-              res.send(JSON.stringify(data));
+              
+              //res.send(JSON.stringify(emailid));
+              res.send(emailid);
             });
           });
       });

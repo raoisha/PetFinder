@@ -12,17 +12,27 @@ function Signin() {
   const [failMsg, setFailMsg] = useState("");
   const [loginStatus, setLoginStatus] = useState(false);
   const { loading, userData } = useLoginValidate();
+  const [message, setMessage] = useState("");
 
   Axios.defaults.withCredentials = true;
 
   const login = () => {
+
+    if (
+      emailid.trim() === "" ||
+      password.trim().length < 5 ||
+      password.trim() === "" )
+     {
+      setMessage("Please enter username and password");
+      alert("Please Enter Username/Password")
+    } 
  
     Axios.post("http://localhost:3001/signin", {
       emailid: emailid,
       password: password,
-    })
-    
-      .then((response) => {
+
+    }).then((response) => {
+        console.log(response);
         setLoginStatus(true);
       })
       .catch((error) => {
@@ -30,7 +40,7 @@ function Signin() {
         setFailMsg(error.response.data.err);
       });
   };
-
+ 
   
 
   if (loading) {
