@@ -78,32 +78,34 @@ export default function RecordLostPet() {
         let longit = longitude.toString();
         lostPetDetails.latitude = lat;
         lostPetDetails.longitude = longit;
-      
-       
+
+        if (lostPetDetails.pet_name.trim() === "" ||
+        lostPetDetails.breed.trim() === "" ||
+        lostPetDetails.color.trim() === "" )
+        {
+            alert("please enter pet name")
+        }else{
         Axios.post("http://localhost:3001/lostpetinfo", {
             lostPetDetails,
             userid,
             
         }).then((response) => {
-            setMessage("Pet details entered successfully.");
             console.log(response);
-            debugger;
-            setMessage("Pet details entered successfully.");
             alert("Pet details entered successfully.");
+            history("/home");
+            setMessage("Pet details entered successfully.");
             setlostPetDetails(true);
-            setRecord(true);
             
         })
         .catch((error) => {
             setMessage(error.response.data.err);
             setlostPetDetails(false);
         });
+    }
     };
 
     
-    if (record) {
-       return <Navigate to="/home"></Navigate>;
-      }
+    
 
     const resetValues=()=>{
         setlostPetDetails("");
@@ -127,7 +129,7 @@ export default function RecordLostPet() {
                                     <div className="input-group-prepend">
                                         <div className="input-group-text">Pet Name</div>
                                     </div>
-                                    <input type="text" className="form-control" id="inputEmail3" placeholder="Name of the pet"
+                                    <input type="text" className="form-control" id="inputName" placeholder="Name of the pet"
                                             onChange={(e) => {
                                                 setlostPetDetails({...lostPetDetails,pet_name:e.target.value});
                                             }}/>
@@ -142,7 +144,7 @@ export default function RecordLostPet() {
                                     <div className="input-group-prepend">
                                         <div className="input-group-text">Breed </div>
                                     </div>
-                                    <input type="text" className="form-control" id="inputPassword3" placeholder="Breed of the pet"
+                                    <input type="text" className="form-control" id="inputBreed" placeholder="Breed of the pet"
                                             onChange={(e) => {
                                                 setlostPetDetails({...lostPetDetails,breed:e.target.value});
                                             }}/>
@@ -178,7 +180,7 @@ export default function RecordLostPet() {
                                     <div className="input-group-prepend">
                                         <div className="input-group-text">Color </div>
                                     </div>
-                                    <input type="text" className="form-control" id="inputPassword3" placeholder=" describe pet Color"
+                                    <input type="text" className="form-control" id="inputColor" placeholder=" describe pet Color"
                                             onChange={(e) => {
                                                 setlostPetDetails({...lostPetDetails,color:e.target.value});
                                             }}/>
@@ -193,7 +195,7 @@ export default function RecordLostPet() {
                                     <div className="input-group-prepend">
                                         <div className="input-group-text">Last Seen Date </div>
                                     </div>
-                                    <input type="date" className="form-control" id="inputPassword3" placeholder="last seen date"
+                                    <input type="date" className="form-control" id="inputDate" placeholder="last seen date"
                                             onChange={(e) => {
                                                 setlostPetDetails({...lostPetDetails,last_seen_date:e.target.value});
                                             }}/>
@@ -208,7 +210,7 @@ export default function RecordLostPet() {
                                     <div className="input-group-prepend">
                                         <div className="input-group-text">Last Seen Time </div>
                                     </div>
-                                    <input type="time" className="form-control" id="inputPassword3" placeholder="last seen time"
+                                    <input type="time" className="form-control" id="inputTime" placeholder="last seen time"
                                             onChange={(e) => {
                                                 setlostPetDetails({...lostPetDetails,last_seen_time:e.target.value});
                                             }}/>
@@ -226,7 +228,7 @@ export default function RecordLostPet() {
                                     <div className="input-group-prepend">
                                         <div className="input-group-text">Photo </div>
                                     </div>
-                                    <input type='file' onChange={onSelectFile} 
+                                    <input type='file' id="inputPhoto" onChange={onSelectFile} 
                                     />
                                     {selectedFile &&  <img src={preview} className="m-auto" width="300" height="200"/> }
                                 </div>
