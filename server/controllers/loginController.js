@@ -109,7 +109,7 @@ const setLogin = (req, res) => {
               const data = {
                 emailid: emailid,
               };
-              res.end(JSON.stringify(data));
+              res.send(JSON.stringify(data));
             });
           });
       });
@@ -124,6 +124,8 @@ const setLogin = (req, res) => {
       res.send("hello");
     }
   };
+
+  
   
 module.exports = {
     getLogin,

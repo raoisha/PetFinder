@@ -4,20 +4,21 @@ const sendEmail = (results) => {
     var transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
-          user: "petfinder@gmail.com", // create admin gmail & add it here
-          pass: "testcc@123", // password 
+          user: "petfinderapp01@gmail.com", // create admin gmail & add it here
+          pass: "lostpetfinder01@", // password 
         },
       });
       
+
       var mailOptionsList = [];
 
       results.forEach((element) => {
         mailOptionsList.push(
           {
-            from: "ccountry86@gmail.com", // admin gmail id
-            to: element.email_id,
-            subject: "Pet Found",
-            text: "Hi " + element.f_name + "\nYour pet has been found. " + "Please go to the App to see the location details " + "\nThank you!",
+            from: "petfinderapp01@gmail.com", // admin gmail id
+            to: element.email,
+            subject: "Your Pet has been located",
+            text: "Hi " + element.fname + "\nYour pet has been found. " + "Please go to the App to see the location details " + "\nThank you!",
           }
         );
       });
