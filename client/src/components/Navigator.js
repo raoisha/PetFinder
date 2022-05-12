@@ -22,7 +22,7 @@ function Navigator() {
                 <img className="petlogo" src={dogimg} alt=" " width="100" height="100" align="left"/>
                 <h1 style={{ textAlign: "left" }}>Pet Finder</h1>
               </Navbar.Brand>
-                <Link to="/home" className="nav-link">
+                <Link to="/home" className="nav-link move-left">
                     HOME
                 </Link>
                 {! userData.user_id && (

@@ -17,6 +17,7 @@
 
 .lost-pet-list{
   background-image: url(../src/images/paw.png);
+  background-color: #bbdd8e;
   position: absolute;
   width: 100%;
   height: 100%;
@@ -146,4 +147,11 @@ input[type=file]{
    font-size: 20px !important;
  }
 
- 
+ .petlogo{
+  margin-right: -7%;
+  margin-left: -39%;
+ }
+
+ .move-left{
+  margin-left: 34%;
+ }
