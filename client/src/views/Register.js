@@ -66,7 +66,7 @@ function Register() {
         userDetails,
       })
      .then((response) => {
-        debugger;
+  
         setMessage(
           `Your login ID is "${response.emailid}"`
         );

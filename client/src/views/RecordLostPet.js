@@ -80,12 +80,12 @@ export default function RecordLostPet() {
         let longit = longitude.toString();
         lostPetDetails.latitude = lat;
         lostPetDetails.longitude = longit;
-        debugger;
+      
         Axios.post("http://localhost:3001/lostpetinfo", {
             lostPetDetails,
+            userid,
             
-        })
-        .then((response) => {
+        }).then((response) => {
             setMessage("Pet details entered successfully.");
             alert("Pet details entered successfully.");
             setlostPetDetails(true);

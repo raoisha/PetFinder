@@ -5,14 +5,18 @@ import Navigator from "../components/Navigator";
 import MapComponent from "./MapComponent";
 import {faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useLoginValidate } from "../components/Validate";
+
 
 let details = {};
 
 function LostPetInfo() {
   Axios.defaults.withCredentials = true;
   const [loading, setLoading] = useState(true);
+  const {userData } = useLoginValidate();
   let { id } = useParams();
   const [basi, setmageFile] = useState()
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     Axios.get('http://localhost:3001/readLostPetDetail/'+ id).then(function(res) {
@@ -24,6 +28,17 @@ function LostPetInfo() {
       });
     }, []);
 
+   const sendEmailToOwner=()=>{
+    let pet_id = details.pet_id ;
+    Axios.post("http://localhost:3001/sendemail", {
+      pet_id,
+    }).then((response) => {
+      setMessage("email successfully sent"); 
+  })
+  .catch((error) => {
+      setMessage(error.response.data.err);
+  });
+}
   
   return (
     <div className="lost-pet-info">
@@ -38,7 +53,7 @@ function LostPetInfo() {
              </div>
              <div className="row justify-content-md-center mt-3">
                <div className="col-3">
-                  <button className="btn btn-primary btn-mail" >
+                  <button className="btn btn-primary btn-mail"  onClick={sendEmailToOwner}>
                     <FontAwesomeIcon icon={faEnvelope} />   
                     <span className="mx-2">Contact Owner</span>
                    </button>

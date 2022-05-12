@@ -14,13 +14,12 @@ const Signout = () => {
   }, []);
   if(loggedOut){
     return (
-      
       <>
       <Navigator></Navigator>
         <div className="main">
           <h1 style={{textAlign:"center"}}>Successfully logged out</h1>
         </div>
-        <Link to="/home" style={{textAlign:"center"}} className="button-xlarge pure-button">Go To Home Page</Link>
+        <Link to="/home" className="return-to-home mx-5">Return To Home Page</Link>
       </>
     );
   }else{
