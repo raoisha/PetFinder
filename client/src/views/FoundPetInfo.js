@@ -68,7 +68,7 @@ function FoundPetInfo() {
              </div>
              <div className="row pure-u-1-3 mt-2">
                <div className="pure-control-group">
-                  <label htmlFor="aligned-name">Pet Breed :  </label>
+                  <label htmlFor="aligned-name">Pet Description :  </label>
                   <label id="aligned-name"  className="answer-color mx-3">{details.pet_description}</label>
                </div>
              </div>
@@ -86,7 +86,12 @@ function FoundPetInfo() {
              </div>
              <div className="row pure-u-1-3">
               <label htmlFor="aligned-name"  className="my-3">Last seen Location :</label>
-                <MapComponent />
+              {loading ? (
+                    <div className="text-center">
+                      .....
+                    </div>
+                  ) : 
+                ( <MapComponent lat={details.loc_latitude} lng={details.loc_longitude}/> )}
              </div>        
            </div>
          </div>

@@ -9,7 +9,6 @@ var items = [1,2,3,4,5,6,7,8,9,0,11,12];
 function Items({ currentItems, history }) {
 
     const itemClick = (event) =>{
-        debugger;
         let id = event.target.parentElement.dataset.key;
         history("/viewLostPetDetails/" + id);
     }
@@ -94,8 +93,6 @@ function PaginatedItems({ itemsPerPage, rowsItem, history }) {
     );
   }
   
-
-
 function ViewLostPetDetails() {
 
     Axios.defaults.withCredentials = true;
