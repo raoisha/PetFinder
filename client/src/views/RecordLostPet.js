@@ -1,5 +1,5 @@
 import React, { useState, Component, useEffect } from "react";
-import { useNavigate, Link} from 'react-router-dom';
+import { useNavigate, Navigate} from 'react-router-dom';
 import Navigator from "../components/Navigator";
 import Axios from "axios";
 import {usePosition} from './usePosition';
@@ -60,11 +60,9 @@ export default function RecordLostPet() {
             setSelectedFile(undefined)
             return
         }
-        debugger;
 
         let idCardBase64 = '';
         getBase64(e.target.files[0], (result) => {
-            debugger;
             idCardBase64 = result;
             setlostPetDetails({...lostPetDetails, 
                 pet_photo: result
@@ -81,12 +79,15 @@ export default function RecordLostPet() {
         lostPetDetails.latitude = lat;
         lostPetDetails.longitude = longit;
       
+       
         Axios.post("http://localhost:3001/lostpetinfo", {
             lostPetDetails,
             userid,
             
         }).then((response) => {
+            setMessage("Pet details entered successfully.");
             console.log(response);
+            debugger;
             setMessage("Pet details entered successfully.");
             alert("Pet details entered successfully.");
             setlostPetDetails(true);
@@ -99,21 +100,9 @@ export default function RecordLostPet() {
         });
     };
 
+    
     if (record) {
-        return (
-          <form className="register-form">
-            <Navigator></Navigator>
-            <div className="main">
-            <br />
-            <br />
-              <h1 style={{ textAlign: "center", color: "white" }}> {message}</h1>
-              <br />
-              <Link to="/home" style={{ fontSize: 35, textAlign: "center" }}>
-                <h1>Return to Home Page</h1>
-              </Link>
-            </div>
-          </form>
-        );
+       return <Navigate to="/home"></Navigate>;
       }
 
     const resetValues=()=>{

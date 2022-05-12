@@ -93,7 +93,13 @@ function LostPetInfo() {
              </div>
              <div className="row pure-u-1-3">
               <label htmlFor="aligned-name"  className="my-3">Last seen Location :</label>
-                <MapComponent />
+                  {loading ? (
+                    <div className="text-center">
+                      .....
+                    </div>
+                  ) : 
+                ( <MapComponent lat={details.loc_latitude} lng={details.loc_longitude}/> )}
+                
              </div>        
            </div>
          </div>
