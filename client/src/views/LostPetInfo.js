@@ -86,7 +86,7 @@ if (mail) {
                <div className="col-3">
                   <button className="btn btn-primary btn-mail"  onClick={sendEmailToOwner}>
                     <FontAwesomeIcon icon={faEnvelope} />   
-                    <span className="mx-2">Contact Owner</span>
+                    <span className="mx-2">Contact {details.fname}</span>
                    </button>
                </div>
              </div>
