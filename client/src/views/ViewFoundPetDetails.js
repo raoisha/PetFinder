@@ -20,7 +20,7 @@ function Items({ currentItems, history }) {
                 <img className="card-img-top" src={res.photo} width="200" height="200" alt="Card image cap" />
                 <div className="card-body" data-key={res.pet_id}>
                     <h5 className="card-title text-success">Name: {res.pet_name}</h5>
-                    <p className="card-text"><small className="text-info">Description: {res.description}</small></p>
+                    <p className="card-text"><small className="text-info">Description: {res.pet_description}</small></p>
                     <p className="card-text"><small className="text-muted">{res.last_seen_date} {res.last_seen_time}</small></p>
                 </div>
             </div>
