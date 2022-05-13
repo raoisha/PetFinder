@@ -100,7 +100,7 @@ function ViewFoundPetDetails() {
     const [loading, setLoading] = useState(true);
     
     useEffect(() => {
-        Axios.get('http://localhost:3001/displayfoundpetlist').then(function(res) {
+        Axios.get('/api/displayfoundpetlist').then(function(res) {
             console.log(res);
             rows = res.data;
             setLoading(false);

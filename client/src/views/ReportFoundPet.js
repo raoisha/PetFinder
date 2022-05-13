@@ -84,7 +84,7 @@ export default function ReportFoundPet() {
             setMessage("Pet details entered successfully.");
             setfoundPetDetails(true);
             setRecord(true);
-            Axios.post("http://localhost:3001/foundpetinfo", {
+            Axios.post("/api/foundpetinfo", {
                 foundPetDetails,
                 userid,
                 

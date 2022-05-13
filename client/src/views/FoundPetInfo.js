@@ -19,7 +19,7 @@ function FoundPetInfo() {
   const [message, setMessage] = useState("");
 
   useEffect(() => {
-    Axios.get('http://localhost:3001/displayfoundpetdetails/'+ id).then(function(res) {
+    Axios.get('/api/displayfoundpetdetails/'+ id).then(function(res) {
         console.log(res);
         details = res.data;
         setLoading(false);
@@ -29,7 +29,7 @@ function FoundPetInfo() {
 
    const sendEmailToOwner=()=>{
     let pet_id = details.pet_id ;
-    Axios.post("http://localhost:3001/sendemail", {
+    Axios.post("/api/sendemail", {
       pet_id,
     }).then((response) => {
       setMessage("email successfully sent"); 

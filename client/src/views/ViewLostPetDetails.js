@@ -102,7 +102,7 @@ function ViewLostPetDetails() {
     
    
     useEffect(() => {
-        Axios.get('http://localhost:3001/displaylostpetinfo').then(function(res) {
+        Axios.get('/api/displaylostpetinfo').then(function(res) {
             console.log(res);
             rows = res.data;
             setLoading(false);

@@ -20,7 +20,7 @@ function LostPetInfo() {
   const [mail, setMail] = useState(false);
 
   useEffect(() => {
-    Axios.get('http://localhost:3001/readLostPetDetail/'+ id).then(function(res) {
+    Axios.get('/api/readLostPetDetail/'+ id).then(function(res) {
         console.log(res);
         details = res.data;
         setLoading(false);
@@ -33,7 +33,7 @@ function LostPetInfo() {
     let pet_id = details.pet_id ;
     setMessage("Email has been Successfully sent to the Owner of the pet"); 
     setMail(true);
-    Axios.post("http://localhost:3001/sendemail", {
+    Axios.post("/api/sendemail", {
       pet_id,
     }).then((response) => {
       console.log(response)

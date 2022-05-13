@@ -99,7 +99,7 @@ export default function RecordLostPet() {
         alert("Pet details entered successfully.");
         setMessage("Pet details entered successfully.");
         setRecord(true)
-        Axios.post("http://localhost:3001/lostpetinfo", {
+        Axios.post("/api/lostpetinfo", {
             lostPetDetails,
             userid,
             

@@ -67,7 +67,7 @@ function Register() {
     }else {
 
       setMessage("User has been successfully registered");
-      Axios.post("http://localhost:3001/register", {
+      Axios.post("/api/register", {
         userDetails,
       })
      .then((response) => {

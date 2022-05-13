@@ -7,7 +7,7 @@ const Signout = () => {
   Axios.defaults.withCredentials = true;
   const [loggedOut, setLoggedout] = useState(false);
   useEffect(() => {
-    Axios.get("http://localhost:3001/signout").then((response) => {
+    Axios.get("/api/signout").then((response) => {
       console.log("logged out");
       sessionStorage.setItem('user_id', '');
       setLoggedout(true);
