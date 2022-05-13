@@ -176,7 +176,7 @@ export default function ReportFoundPet() {
                                         <div className="input-group-prepend">
                                             <div className="input-group-text">Pet Description </div>
                                         </div>
-                                        <textarea type="date" className="form-control" id="inputPassword3" placeholder="Enter the description of the Pet"
+                                        <textarea type="date" className="form-control text-box" id="inputPassword3" placeholder="Enter the description of the Pet"
                                                 onChange={(e) => {
                                                     setfoundPetDetails({...foundPetDetails,pet_description:e.target.value});
                                                 }}/>
@@ -193,7 +193,7 @@ export default function ReportFoundPet() {
                                         </div>
                                         <input type='file' onChange={onSelectFile} 
                                         />
-                                        {selectedFile &&  <img src={preview} className="m-auto" width="300" height="200"/> }
+                                        {selectedFile &&  <img src={preview} className="m-3" width="300" height="200"/> }
                                     </div>
                                 </div>
                             </div>
